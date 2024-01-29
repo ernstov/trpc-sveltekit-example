@@ -1,0 +1,45 @@
+namespace: trpc-sveltekit-example
+
+sveltekit-application:
+  defines: runnable
+  metadata:
+    name: sveltekit-application
+    description: Frontend and backend server for the bookstall application.
+    icon: https://emojiapi.dev/api/v1/globe_with_meridians.svg
+  containers:
+    sveltekit-application:
+      image: env-6241.registry.local/sveltekit-application:main-8lm8o0
+      build: .
+      dockerfile: Dockerfile.sveltekit-application
+  services:
+    http-server-port:
+      description: Port for the HTTP server
+      container: sveltekit-application
+      port: 3000
+      host-port: 3000
+      publish: true
+      protocol: tcp
+  connections:
+    sqlite-database-connection:
+      target: trpc-sveltekit-example/sqlite-database
+      service: '!!!SETME!!!'
+      optional: true
+      description: Connection to the SQLite database
+  variables:
+    jwt-secret:
+      env: JWT_SECRET
+      type: string
+      value: '!!!SETME!!!'
+      description: Secret key for JWT authentication
+
+stack:
+  defines: group
+  members:
+    - trpc-sveltekit-example/sveltekit-application
+  metadata:
+    name: trpc-sveltekit-example
+    description: >-
+      A SvelteKit application that demonstrates the use of tRPC for building
+      type-safe APIs. It includes a backend server component and uses SQLite as
+      the database.
+    icon: https://emojiapi.dev/api/v1/blue_book.svg
