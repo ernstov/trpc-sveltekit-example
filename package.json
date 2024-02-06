@@ -11,6 +11,7 @@
     "dev": "vite --clearScreen false",
     "build": "vite build",
     "preview": "vite preview",
+    "start": "vite preview",
     "check": "svelte-kit sync && svelte-check",
     "check:watch": "svelte-kit sync && svelte-check --watch",
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
