@@ -26,4 +26,4 @@ EXPOSE 3000
 ENV JWT_SECRET=your_jwt_secret_here
 
 # Start the application with the correct port
-CMD ["yarn", "preview", "--port", "3000"]
+CMD ["yarn", "preview", "--port", "3000", "--host"]
